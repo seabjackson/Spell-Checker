@@ -1,0 +1,51 @@
+0.  TODO What is pneumonoultramicroscopicsilicovolcanoconiosis?
+
+According to the Oxford English Dictionary, it is "an artificial long word said to mean a lung disease caused by inhaling very fine ash and sand dust.
+    
+1.  TODO According to its man page, what does getrusage do?
+
+The getrusage() function shall provide measures of the resources used by the current process or its terminated and waited-for child processes. 
+If the value of the who argument is RUSAGE_SELF, information shall be returned about resources used by the current process. If the value of the
+who argument is RUSAGE_CHILDREN, information shall be returned about resources used by the terminated and waited-for children of the current
+process. If the child is never waited for (for example, if the parent has SA_NOCLDWAIT set or sets SIGCHLD to SIG_IGN), the resource
+information for the child process is discarded and not included in the resource information provided by getrusage().
+
+2.  TODO Per that same man page, how many members are in a variable of type struct rusage?
+
+There are 16 members in a variable of type struct rusage.
+
+3.  TODO Why do you think we pass before and after by reference (instead of by value) to calculate, even though we’re not changing their contents?
+
+Structs in C are passed by reference. If we pass by value, and the item we are passing it will take some time to calculate te before and after values such
+that our calculations for calculate will be larger than reality.
+
+4.  TODO  Explain as precisely as possible, in a paragraph or more, how main goes about reading words from a file. In other words,
+convince us that you indeed understand how that function’s for loop works.
+
+Main first checks for the correct usage in the command-line, thereby determining which dictionary to use, and text to be spell checked. It then 
+initializes a struct, and some variables for timing data and checking benchmarks. After determining which dictionary to use we load it, then we
+calculate the time to load that dictionary and try opening the text file. 
+
+Once the text file is open, we use fgetc to read each character of the text file until we get to the end of the file.
+We ensure that only alphabetical characters and apostrophe's are accepted in our words. We also enure that the length of the words isn't beyond
+the length of the longest word in our dictionary, and that no numerical strings are used. Once those checks are in play, we consume the remainder of
+the alphabetical string since we always increment the index of our string until the end of the file. Once the index of the word we are in is greater
+than 0, we check to make sure that we get an entire word. Thus we iterate until we see the null character, at which point we increment word. In addition
+, we do a calculation to see how long it took us to check the word. At the same time we also get how many mispelled words there were if any. Finally, 
+we do some other benchmarks on our dictionary and print out the relevant data.
+
+5.  TODO  Why do you think we used fgetc to read each word’s characters one at a time rather than use fscanf with a format string like "%s" to read
+whole words at a time? Put another way, what problems might arise by relying on fscanf alone?
+
+There is no bounds checking with fscanf, thus it is better to use fgetc as if we use the former we might not know when we reac the end of the word or 
+the file.
+
+6.  TODO Why do you think we declared the parameters for check and load as const?
+
+The const type indicates that the parameters are a constant and that their values cannot be changed. Indeed this should be the case if we are to
+receive correct data from those functions. The word we are using to check in the dictionary must be the same from beginning to end.
+
+7.  TODO  
+8.  TODO
+9.  TODO
+10. TODO
